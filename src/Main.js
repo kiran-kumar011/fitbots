@@ -21,7 +21,7 @@ class Main extends Component {
 		this.setState({ [e.target.name] : e.target.value });
 	}
 
-	handleSubmit = e => {
+	handleSubmit = () => {
 		console.log('handle submit');
 		const { playersCount } = this.state;
 		// const alpha = 'abcdefghijklmnopqrstuvwxyz';
@@ -48,6 +48,13 @@ class Main extends Component {
 		this.setState({ isClicked: !this.state.isClicked, playerSelected: null });
 	}
 
+	handleEnter = e => {
+		console.log('handleEnter');
+		if(e.keyCode === 13) {
+			this.handleSubmit();
+		}
+	}
+
 	render() {
 		const { playersArr, isClicked, playerSelected } = this.state;
 		return(
@@ -55,6 +62,7 @@ class Main extends Component {
 				<div className='input-wrapper'>
 					<label>Number of Players</label>
 					<input className='input'
+						onKeyDown={ this.handleEnter }
 						onChange={ this.handleChange }
 						name='playersCount'
 						type='number'
